@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isTodayAHoliday(List<Event> events) {
         String todayStr = sdf.format(new Date());
         for (Event event : events) {
-            if (event.getCategoryTitle().toLowerCase().contains("holiday")) {
+            if (event.getCategoryTitle().toLowerCase().contains("holiday") || event.getCategoryTitle().toLowerCase().contains("no classes")) {
                 String eventDateStr = event.getStart().split("T")[0]; // Assuming the date format is "yyyy-MM-ddTHH:mm:ss"
                 if (todayStr.equals(eventDateStr)) {
                     return true;

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.util.Calendar;
 import java.util.List;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
@@ -18,6 +19,8 @@ public class NetworkUtils {
 
     private static final OkHttpClient client = new OkHttpClient();
     private static final Gson gson = new Gson();
+    private static final Calendar calendar = Calendar.getInstance();
+
     public static String fetchToken() throws IOException {
         String url = "https://www.houstonisd.org/Generator/TokenGenerator.ashx/ProcessRequest";
 
@@ -43,9 +46,15 @@ public class NetworkUtils {
     }
 
     public static String fetchEvents() throws IOException {
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH); // Note: January is 0, December is 11
+        int firstDay = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        String startDate = String.format("%d-%02d-%02d", year, month + 1, firstDay); // Adding 1 to month as it starts from 0
+        String endDate = String.format("%d-%02d-%02d", year, month + 1, lastDay);
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://awsapieast1-prod22.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1").newBuilder()
-                .addQueryParameter("StartDate", "2024-04-01")
-                .addQueryParameter("EndDate", "2024-04-30")
+                .addQueryParameter("StartDate", startDate)
+                .addQueryParameter("EndDate", endDate)
                 .addQueryParameter("ModuleInstanceFilter", "")
                 .addQueryParameter("CategoryFilter", "")
                 .addQueryParameter("IsDBStreamAndShowAll", "true");
