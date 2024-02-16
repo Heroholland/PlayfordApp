@@ -30,7 +30,21 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-    
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    // Assuming you have a method to get events already, let's add a method to check for holidays
+    public static boolean isTodayAHoliday(List<Event> events) {
+        String todayStr = sdf.format(new Date());
+        for (Event event : events) {
+            if (event.getCategoryTitle().toLowerCase().contains("holiday")) {
+                String eventDateStr = event.getStart().split("T")[0]; // Assuming the date format is "yyyy-MM-ddTHH:mm:ss"
+                if (todayStr.equals(eventDateStr)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,18 +64,25 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler(Looper.getMainLooper());
 
         executor.execute(() -> {
-            String response = NetworkUtils.fetchEvents();
-            handler.post(() -> {
-                // Update the UI with `response`
-                //TextView textView = findViewById(R.id.textView);
-                //textView.setText(response);
-                if (response != null) {
-                    List<Event> events = NetworkUtils.parseEvents(response);
-                    for (Event e : events) {
-                        Log.w("myApp", e.toString());
+            String response = null;
+            try {
+                response = NetworkUtils.fetchEvents();
+                String finalResponse = response;
+                handler.post(() -> {
+                    // Update the UI with `response`
+                    //TextView textView = findViewById(R.id.textView);
+                    //textView.setText(response);
+                    if (finalResponse != null) {
+                        List<Event> events = NetworkUtils.parseEvents(finalResponse);
+                        Log.w("myApp","Holiday: " + isTodayAHoliday(events));
+                        for (Event e : events) {
+                            Log.w("myApp", e.toString());
+                        }
                     }
-                }
-            });
+                });
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 }

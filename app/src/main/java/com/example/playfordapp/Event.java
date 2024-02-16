@@ -15,6 +15,26 @@ public class Event {
     private String RecurringInfo;
     private boolean AllDay;
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "Id=" + Id +
+                ", EventID=" + EventID +
+                ", ModuleInstanceID=" + ModuleInstanceID +
+                ", RecurringEvent=" + RecurringEvent +
+                ", RegisteredUsers=" + RegisteredUsers +
+                ", Title='" + Title + '\'' +
+                ", Start='" + Start + '\'' +
+                ", End='" + End + '\'' +
+                ", CategoryColor='" + CategoryColor + '\'' +
+                ", CategoryTitle='" + CategoryTitle + '\'' +
+                ", EventSource='" + EventSource + '\'' +
+                ", RecurringInfo='" + RecurringInfo + '\'' +
+                ", AllDay=" + AllDay +
+                ", NoEndTime=" + NoEndTime +
+                '}';
+    }
+
     public long getId() {
         return Id;
     }

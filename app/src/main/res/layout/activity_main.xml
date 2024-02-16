@@ -7,113 +7,134 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <View
+        android:id="@+id/Background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#81DAC3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/Background"
-            android:layout_width="879dp"
-            android:layout_height="477dp"
-            android:background="#81DAC3"
-            tools:layout_editor_absoluteX="39dp"
-            tools:layout_editor_absoluteY="24dp" />
+    <!-- Assuming you want the views to be somewhat evenly distributed and centered,
+         Adjust the width and height or use 'wrap_content' as needed -->
 
-        <View
-            android:id="@+id/viewP1"
-            android:layout_width="375dp"
-            android:layout_height="129dp"
-            android:background="#60A5D5"
-            tools:layout_editor_absoluteX="64dp"
-            tools:layout_editor_absoluteY="172dp" />
+    <View
+        android:id="@+id/viewP1"
+        android:layout_width="0dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="140dp"
+        android:background="#60A5D5"
+        app:layout_constraintEnd_toStartOf="@+id/viewP2"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/viewP4"
-            android:layout_width="375dp"
-            android:layout_height="129dp"
-            android:background="#60A5D5"
-            tools:layout_editor_absoluteX="489dp"
-            tools:layout_editor_absoluteY="330dp" />
+    <View
+        android:id="@+id/viewP2"
+        android:layout_width="0dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="140dp"
+        android:background="#60A5D5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewP1"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/viewP3"
-            android:layout_width="375dp"
-            android:layout_height="129dp"
-            android:background="#60A5D5"
-            tools:layout_editor_absoluteX="64dp"
-            tools:layout_editor_absoluteY="330dp" />
+    <View
+        android:id="@+id/viewP3"
+        android:layout_width="0dp"
+        android:layout_height="129dp"
+        android:background="#60A5D5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewP1"
+        app:layout_constraintEnd_toStartOf="@id/viewP4"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-        <View
-            android:id="@+id/viewP2"
-            android:layout_width="375dp"
-            android:layout_height="129dp"
-            android:background="#60A5D5"
-            tools:layout_editor_absoluteX="489dp"
-            tools:layout_editor_absoluteY="172dp" />
+    <View
+        android:id="@+id/viewP4"
+        android:layout_width="0dp"
+        android:layout_height="129dp"
+        android:background="#60A5D5"
+        app:layout_constraintStart_toEndOf="@id/viewP3"
+        app:layout_constraintTop_toBottomOf="@id/viewP2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="324dp"
-            android:layout_marginTop="44dp"
-            android:fontFamily="@font/bungee"
-            android:shadowColor="#575757"
-            android:text="Daily Schedule"
-            android:textColor="#000000"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- Adjust the placement of TextViews as needed. Here is an example for one TextView -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Daily Schedule"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/dateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="348dp"
-            android:layout_marginTop="120dp"
-            android:text="TextView"
-            android:textColor="#070707"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- Place other TextViews relative to their corresponding Views or as needed -->
+    <!-- Example for placing a TextView related to viewP1 -->
+    <TextView
+        android:id="@+id/p1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{x1} Period"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/viewP1"
+        app:layout_constraintEnd_toEndOf="@id/viewP1"
+        app:layout_constraintTop_toTopOf="@id/viewP1"
+        app:layout_constraintBottom_toBottomOf="@id/viewP1"/>
 
-        <TextView
-            android:id="@+id/p1Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{x1} Period"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="224dp" />
+    <TextView
+        android:id="@+id/p2Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{x2} Period"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewP2"
+        app:layout_constraintEnd_toEndOf="@id/viewP2"
+        app:layout_constraintStart_toStartOf="@id/viewP2"
+        app:layout_constraintTop_toTopOf="@id/viewP2" />
 
-        <TextView
-            android:id="@+id/p2Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{x2} Period"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="625dp"
-            tools:layout_editor_absoluteY="224dp" />
+    <TextView
+        android:id="@+id/p3Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{x3} Period"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewP3"
+        app:layout_constraintEnd_toEndOf="@id/viewP3"
+        app:layout_constraintStart_toStartOf="@id/viewP3"
+        app:layout_constraintTop_toTopOf="@id/viewP3" />
 
-        <TextView
-            android:id="@+id/p3Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{x3} Period"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="381dp" />
+    <TextView
+        android:id="@+id/p4Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{x4} Period"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewP4"
+        app:layout_constraintEnd_toEndOf="@id/viewP4"
+        app:layout_constraintStart_toStartOf="@id/viewP4"
+        app:layout_constraintTop_toTopOf="@id/viewP4" />
 
-        <TextView
-            android:id="@+id/p4Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{x4} Period"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="625dp"
-            tools:layout_editor_absoluteY="381dp" />
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView3" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Repeat the pattern for other TextViews and Views as needed -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
