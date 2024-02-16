@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/p4Text"
+            android:id="@+id/p1Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="{x1} Period"
@@ -88,13 +88,22 @@
             tools:layout_editor_absoluteY="224dp" />
 
         <TextView
-            android:id="@+id/p4Text"
+            android:id="@+id/p2Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="{x2} Period"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="621dp"
+            tools:layout_editor_absoluteX="625dp"
             tools:layout_editor_absoluteY="224dp" />
+
+        <TextView
+            android:id="@+id/p3Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="{x3} Period"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="200dp"
+            tools:layout_editor_absoluteY="381dp" />
 
         <TextView
             android:id="@+id/p4Text"
@@ -102,17 +111,8 @@
             android:layout_height="wrap_content"
             android:text="{x4} Period"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="621dp"
-            tools:layout_editor_absoluteY="378dp" />
-
-        <TextView
-            android:id="@+id/p4Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{x3} Period"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="378dp" />
+            tools:layout_editor_absoluteX="625dp"
+            tools:layout_editor_absoluteY="381dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
