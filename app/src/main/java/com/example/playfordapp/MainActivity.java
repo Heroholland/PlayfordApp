@@ -35,6 +35,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Calendar cal = Calendar.getInstance();
 
     // Assuming you have a method to get events already, let's add a method to check for holidays
     public static boolean isDateHoliday(String title, String catTitle) {
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
             }
         return false;
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
-        List<Date> holidays = new ArrayList<Date>();
+        List<Date> holidays = new ArrayList<Date>(); //List of all holidays in the current month
         executor.execute(() -> {
             String response = null;
             try {
