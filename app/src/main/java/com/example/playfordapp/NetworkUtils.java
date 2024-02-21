@@ -1,5 +1,7 @@
 package com.example.playfordapp;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -17,7 +19,7 @@ import okhttp3.MediaType;
 
 public class NetworkUtils {
 
-    private static final OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
     private static final Gson gson = new Gson();
     private static final Calendar calendar = Calendar.getInstance();
 
@@ -50,6 +52,8 @@ public class NetworkUtils {
         int month = calendar.get(Calendar.MONTH); // Note: January is 0, December is 11
         int firstDay = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
         int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        String token = fetchToken();
+        Log.w("myApp", "token: " + token);
         String startDate = String.format("%d-%02d-%02d", year, month + 1, firstDay); // Adding 1 to month as it starts from 0
         String endDate = String.format("%d-%02d-%02d", year, month + 1, lastDay);
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://awsapieast1-prod22.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1").newBuilder()
@@ -64,7 +68,7 @@ public class NetworkUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("Accept", "application/json")
-                .addHeader("Authorization", "Bearer " + fetchToken()) // Replace <your_token_here> with your actual token
+                .addHeader("Authorization", "Bearer " + token) // Replace <your_token_here> with your actual token
                 // Add other headers here
                 .build();
 

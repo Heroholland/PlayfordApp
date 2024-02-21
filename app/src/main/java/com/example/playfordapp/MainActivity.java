@@ -13,7 +13,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.playfordapp.NetworkUtils;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.io.IOException;
@@ -30,19 +33,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     // Assuming you have a method to get events already, let's add a method to check for holidays
-    public static boolean isTodayAHoliday(List<Event> events) {
-        String todayStr = sdf.format(new Date());
-        for (Event event : events) {
-            if (event.getCategoryTitle().toLowerCase().contains("holiday") || event.getCategoryTitle().toLowerCase().contains("no classes")) {
-                String eventDateStr = event.getStart().split("T")[0]; // Assuming the date format is "yyyy-MM-ddTHH:mm:ss"
-                if (todayStr.equals(eventDateStr)) {
-                    return true;
-                }
+    public static boolean isDateHoliday(String title, String catTitle) {
+            if (catTitle.toLowerCase().contains("holiday") || catTitle.toLowerCase().contains("no classes") || title.toLowerCase().contains("holiday") || title.toLowerCase().contains("no classes")) {
+                return true;
             }
-        }
         return false;
     }
     @Override
@@ -62,21 +60,27 @@ public class MainActivity extends AppCompatActivity {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
-
+        List<Date> holidays = new ArrayList<Date>();
         executor.execute(() -> {
             String response = null;
             try {
                 response = NetworkUtils.fetchEvents();
                 String finalResponse = response;
                 handler.post(() -> {
-                    // Update the UI with `response`
-                    //TextView textView = findViewById(R.id.textView);
-                    //textView.setText(response);
+
                     if (finalResponse != null) {
                         List<Event> events = NetworkUtils.parseEvents(finalResponse);
-                        Log.w("myApp","Holiday: " + isTodayAHoliday(events));
                         for (Event e : events) {
-                            Log.w("myApp", e.toString());
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date edate;
+                            try {
+                                edate = formatter.parse(e.getEnd());
+                                if (isDateHoliday(e.getCategoryTitle(), e.getTitle())) {
+                                    holidays.add(edate);
+                                }
+                            } catch (Exception ex) {
+                                Log.w("Exception", ex);
+                            }
                         }
                     }
                 });
