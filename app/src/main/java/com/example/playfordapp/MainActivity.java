@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    public static boolean isWeekday(int dateOfMonth) {
+        //TODO
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
