@@ -11,6 +11,7 @@ gridlayout = "1.0.0"
 okhttp = "4.9.0"
 okhttps = "3.4.1"
 gson = "2.10.1"
+firebaseInappmessaging = "20.4.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -24,6 +25,7 @@ gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref =
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttps = { group = "com.squareup.okhttp3", name = "okhttps", version.ref = "okhttps" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
