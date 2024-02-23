@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private String determineDayType(Date currentDate) {
+    private String getDayType(Date date) {
         Calendar currentCalendar = Calendar.getInstance();
-        currentCalendar.setTime(currentDate);
+        currentCalendar.setTime(date);
         int count = 0;
 
         while (cal.before(currentCalendar)) {
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         });
+        Log.w("myApp", getDayType(cal.getTime()));
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
