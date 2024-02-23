@@ -26,56 +26,36 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    private static final List<Date> holidays = new ArrayList<>(); //List of all holidays in the current month
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    private static final Calendar cal = Calendar.getInstance();
+    private final List<Date> holidays = new ArrayList<>(); //List of all holidays in the current month
+
+
 
     // Assuming you have a method to get events already, let's add a method to check for holidays
-    public static boolean isDateHoliday(String title, String catTitle) {
-            if (catTitle.toLowerCase().contains("holiday") || catTitle.toLowerCase().contains("no classes") || title.toLowerCase().contains("holiday") || title.toLowerCase().contains("no classes")) {
-                return true;
-            }
-        return false;
-    }
-    private boolean isHoliday(Date date) {
-        for (Date holiday : holidays) {
-            if (sdf.format(date).equals(sdf.format(holiday))) {
-                return true;
+
+    private void setupPeriodForToday(String dayType) {
+        TextView periodTexts[] = {findViewById(R.id.p1Text), findViewById(R.id.p2Text), findViewById(R.id.p3Text), findViewById(R.id.p4Text)};
+        if (dayType.equalsIgnoreCase("A")) {
+            //A day
+            for (int i = 0; i < 4; i++) {
+                periodTexts[i].setText(String.valueOf(i+1) + "st Period");
+                Log.w("myApp", String.valueOf(periodTexts[i]));
             }
         }
-        return false;
-    }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static boolean isWeekday(Date dateOfMonth) {
-        Calendar cal=Calendar.getInstance();
-        //LocalDate localDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), dateOfMonth);
-        //Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        cal.setTime(dateOfMonth);
-        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        if (dayOfWeek == 1 || dayOfWeek == 7) {
-            return false;
-        }
-        return true;
-    }
-
-    private String getDayType(Date date) {
-        Calendar currentCalendar = Calendar.getInstance();
-        currentCalendar.setTime(date);
-        int count = 0;
-
-        while (cal.before(currentCalendar)) {
-            cal.add(Calendar.DATE, 1);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                if (!isWeekday(cal.getTime()) || isHoliday(cal.getTime())) {
-                    continue; // Skip weekends and holidays
-                }
+        if (dayType.equalsIgnoreCase("B")) {
+            //A day
+            for (int i = 0; i < 4; i++) {
+                periodTexts[i].setText(String.valueOf(i+5) + "st Period");
+                Log.w("myApp", String.valueOf(periodTexts[i]));
             }
-            count++;
         }
-
-        return count % 2 == 0 ? "A" : "B";
+        if (dayType.equalsIgnoreCase("No School")) {
+            //A day
+            for (int i = 0; i < 4; i++) {
+                periodTexts[i].setText("No School Today");
+                Log.w("myApp", String.valueOf(periodTexts[i]));
+            }
+        }
     }
 
 
@@ -99,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                             Date edate;
                             try {
                                 edate = formatter.parse(e.getEnd());
-                                if (isDateHoliday(e.getCategoryTitle(), e.getTitle())) {
+                                if (CalendarUtils.isDateHoliday(e.getCategoryTitle(), e.getTitle())) {
                                     holidays.add(edate);
                                     Log.w("myApp", String.valueOf(holidays));
                                     return;
@@ -114,7 +94,11 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         });
-        Log.w("myApp", getDayType(cal.getTime()));
+        CalendarUtils cal = new CalendarUtils(holidays);
+        Calendar today = Calendar.getInstance();
+        //today.add(Calendar.DATE, 3); // For debugging purposes
+        String dayType = cal.getDayType(today.getTime());
+        Log.w("myApp", dayType);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -124,9 +108,11 @@ public class MainActivity extends AppCompatActivity {
         });
         Calendar calendar = Calendar.getInstance();
         String dateStr = calendar.getTime().toString();
-        TextView date = (TextView) findViewById(R.id.dateText);
-        date.setText(dateStr);
-
-
+        TextView dateTxt = (TextView) findViewById(R.id.dateText);
+        dateTxt.setText(dateStr); //Display the current date
+        setupPeriodForToday(dayType);
+        TextView dateTypeTxt = (TextView) findViewById(R.id.dayTypeText);
+        dateTypeTxt.setText("Today is an: " + dayType + " day");
     }
+
 }
