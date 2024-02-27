@@ -32,10 +32,6 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
     private final List<Date> holidays = new ArrayList<>(); //List of all holidays in the current month
 
-
-
-    // Assuming you have a method to get events already, let's add a method to check for holidays
-
     private void setupPeriodForToday(String dayType) {
         TextView periodTexts[] = {findViewById(R.id.p1Text), findViewById(R.id.p2Text), findViewById(R.id.p3Text), findViewById(R.id.p4Text)};
         if (dayType.equalsIgnoreCase("A")) {
@@ -122,9 +118,8 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.nextScreenButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, second_screen.class);
-                intent.putExtra("extraData", dayType); // Optional: Passing data
-                startActivity(intent);
+                Intent intentSend = new Intent(MainActivity.this, second_screen.class);
+                startActivity(intentSend);
             }
         });
 
