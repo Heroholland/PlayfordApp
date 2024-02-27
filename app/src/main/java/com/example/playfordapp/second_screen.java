@@ -78,7 +78,7 @@ public class second_screen extends AppCompatActivity {
         }.start();
 
         timerRunning = true;
-        startStopButton.setText("Pause");//
+        startStopButton.setText("Pause");
     }
 
     private void stopTimer() {
