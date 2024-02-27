@@ -71,7 +71,7 @@ public class second_screen extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timerRunning = false;
-                startStopButton.setText("Start");
+                startStopButton.setText("Commencer");
                 timeLeftInMillis = 60000; // Reset to 1 minute
                 updateTimerText();
             }
@@ -84,7 +84,7 @@ public class second_screen extends AppCompatActivity {
     private void stopTimer() {
         countDownTimer.cancel();
         timerRunning = false;
-        startStopButton.setText("Start");
+        startStopButton.setText("Commencer");
     }
 
     private void updateTimerText() {
