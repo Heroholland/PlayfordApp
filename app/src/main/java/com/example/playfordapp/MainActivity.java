@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intentSend = new Intent(MainActivity.this, second_screen.class);
-                startActivity(intentSend);
+                startActivity(intentSend); //Goto screen 2
             }
         });
 
