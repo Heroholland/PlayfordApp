@@ -44,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         if (dayType.equalsIgnoreCase("A")) {
             //A day
             for (int i = 0; i < 4; i++) {
-                periodTexts[i].setText(String.valueOf(i+1) + "st Period");
+                if (i+1 == 1) {
+                    periodTexts[i].setText(String.valueOf(i + 1) + "er Période");
+                } else {
+                    periodTexts[i].setText(String.valueOf(i + 1) + "e Période");
+                }
                 Log.w("myApp", String.valueOf(periodTexts[i]));
             }
         }
@@ -52,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
         if (dayType.equalsIgnoreCase("B")) {
             //A day
             for (int i = 0; i < 4; i++) {
-                periodTexts[i].setText(String.valueOf(i+5) + "st Period");
+                periodTexts[i].setText(String.valueOf(i+5) + "e Période");
                 Log.w("myApp", String.valueOf(periodTexts[i]));
             }
         }
-        if (dayType.equalsIgnoreCase("No School")) {
+        if (dayType.equalsIgnoreCase("Pas D'école")) {
             //A day
             for (int i = 0; i < 4; i++) {
-                periodTexts[i].setText("No School Today");
+                periodTexts[i].setText("Pas D'école Aujourd'hui!");
                 Log.w("myApp", String.valueOf(periodTexts[i]));
             }
         }
