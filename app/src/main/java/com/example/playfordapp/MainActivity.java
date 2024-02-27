@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             dateTxt.setText(dateStr); //Display the current date
             setupPeriodForToday(dayType);
             TextView dateTypeTxt = (TextView) findViewById(R.id.dayTypeText);
-            dateTypeTxt.setText("Today is an: " + dayType + " day");
+            dateTypeTxt.setText("Aujourd'hui est un: " + dayType + " jour!");
 
             Button button = (Button) findViewById(R.id.nextScreenButton);
             button.setOnClickListener(new View.OnClickListener() {
