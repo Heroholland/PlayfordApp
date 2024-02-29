@@ -1,4 +1,4 @@
-package com.example.playfordapp;
+package com.holland.playfordapp;
 
 import android.os.Build;
 
@@ -47,7 +47,7 @@ public class CalendarUtils {
         targetCal.set(Calendar.SECOND, 0);
         targetCal.set(Calendar.MILLISECOND, 0);
 
-        //check if it is on a weekend
+        //Check if it is on a weekend
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (!isWeekday(targetCal.getTime()) || isHoliday(targetDate)) {
                 return "No School";
@@ -68,13 +68,13 @@ public class CalendarUtils {
 
         return count % 2 == 0 ? "A" : "B";
     }
-    public static boolean isDateHoliday(String title, String catTitle) {
+    public static boolean isDateHoliday(String title, String catTitle) { //Returns if a specific date is a holiday based on the title
         if (catTitle.toLowerCase().contains("holiday") || catTitle.toLowerCase().contains("no classes") || title.toLowerCase().contains("holiday") || title.toLowerCase().contains("no classes")) {
             return true;
         }
         return false;
     }
-    public boolean isHoliday(Date date) {
+    public boolean isHoliday(Date date) { //Returns if a date is a holiday given just the Date object
         for (Date holiday : holidays) {
             if (sdf.format(date).equals(sdf.format(holiday))) {
                 return true;

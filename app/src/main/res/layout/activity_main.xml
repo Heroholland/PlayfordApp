@@ -17,9 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Assuming you want the views to be somewhat evenly distributed and centered,
-         Adjust the width and height or use 'wrap_content' as needed -->
-
     <View
         android:id="@+id/viewP1"
         android:layout_width="0dp"

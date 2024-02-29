@@ -1,4 +1,4 @@
-package com.example.playfordapp;
+package com.holland.playfordapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,7 +27,7 @@ public class second_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second_screen); // Make sure to replace "your_layout_name" with the actual name of your XML layout file.
+        setContentView(R.layout.activity_second_screen);
 
         Intent intent = getIntent();
         Log.w("myApp", "2: " + String.valueOf(intent.getIntExtra("timeLeftMillis", 60*1000)));
@@ -60,7 +60,7 @@ public class second_screen extends AppCompatActivity {
         updateTimerText();
     }
 
-    private void startTimer() {
+    private void startTimer() { // Starts the countdown timer with 10 minutes on the clock
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

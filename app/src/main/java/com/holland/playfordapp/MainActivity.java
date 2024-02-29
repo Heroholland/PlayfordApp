@@ -1,4 +1,4 @@
-package com.example.playfordapp;
+package com.holland.playfordapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupPeriodForToday(String dayType) {
         TextView periodTexts[] = {findViewById(R.id.p1Text), findViewById(R.id.p2Text), findViewById(R.id.p3Text), findViewById(R.id.p4Text)};
-        if (dayType.equalsIgnoreCase("A")) {
+        if (dayType.equalsIgnoreCase("A")) { //A day period texts setup
             //A day
             for (int i = 0; i < 4; i++) {
                 if (i+1 == 1) {
@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (dayType.equalsIgnoreCase("B")) {
+        if (dayType.equalsIgnoreCase("B")) { //Setup period texts for B day
             //A day
             for (int i = 0; i < 4; i++) {
                 periodTexts[i].setText(String.valueOf(i+5) + "e Période");
                 Log.w("myApp", String.valueOf(periodTexts[i]));
             }
         }
-        if (dayType.equalsIgnoreCase("Pas D'école")) {
+        if (dayType.equalsIgnoreCase("Pas D'école")) { //No school day period texts setup
             //A day
             for (int i = 0; i < 4; i++) {
                 periodTexts[i].setText("Pas D'école Aujourd'hui!");
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("No WiFi Connection");
         builder.setMessage("Please connect to WiFi to continue.");
         builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
-        // No need to check if activity is finishing here as it's already checked above
         dialog = builder.create();
         dialog.show();
     }
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        // Check if dialog is showing and dismiss it to prevent window leak
+        //Check if dialog is showing and dismiss it to prevent errors with the application
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
@@ -100,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        //Just checking for errors again just incase they lose connection while in the app
         super.onResume();
         if (!isConnectedToWifi(this)) {
             showWifiErrorDialog(this);
@@ -162,7 +162,8 @@ public class MainActivity extends AppCompatActivity {
             dateTxt.setText(dateStr); //Display the current date
             setupPeriodForToday(dayType);
             TextView dateTypeTxt = (TextView) findViewById(R.id.dayTypeText);
-            dateTypeTxt.setText("Aujourd'hui est un: " + dayType + " jour!");
+            dateTypeTxt.setText("Aujourd'hui est un: " + dayType + " jour!"); 
+            //Display which type of day it is today
 
             Button button = (Button) findViewById(R.id.nextScreenButton);
             button.setOnClickListener(new View.OnClickListener() {

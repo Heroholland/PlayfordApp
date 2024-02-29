@@ -1,4 +1,4 @@
-package com.example.playfordapp;
+package com.holland.playfordapp;
 
 public class Event {
     private long Id;
@@ -14,7 +14,7 @@ public class Event {
     private String EventSource;
     private String RecurringInfo;
     private boolean AllDay;
-
+    //Basic auto-generated data structure setup for event
     @Override
     public String toString() {
         return "Event{" +

@@ -1,4 +1,4 @@
-package com.example.playfordapp;
+package com.holland.playfordapp;
 
 import java.security.cert.CertificateException;
 import javax.net.ssl.HostnameVerifier;
@@ -11,6 +11,7 @@ import okhttp3.OkHttpClient;
 
 public class UnsafeOkHttpClient {
     public static OkHttpClient getUnsafeOkHttpClient() {
+        //Although this looks like a lot, it's essentially just disabling the certificate exception since they often occurs with the specific HISD website utilized in this case.
         try {
             // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[]{
